@@ -9,7 +9,7 @@ font pango:monospace 8
 #font pango:DejaVu Sans Mono 8
 
 # Set border
-default_border pixel 2
+default_border pixel 4
 hide_edge_borders smart
 
 # Set gaps
@@ -43,6 +43,12 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty
+
+# dropdown terminal with scratchpad
+exec --no-startup-id alacritty --class="dropterm"
+for_window [class="dropterm"] move scratchpad
+bindsym $mod+F1 [class="dropterm"] scratchpad show; move position center
+bindsym $mod+Shift+F1 exec --no-startup-id alacritty --class="dropterm"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -190,3 +196,9 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
 # Start bluetooth tray applet
 exec --no-startup-id blueman-applet
+
+# Start compositor
+exec --no-startup-id picom -b
+
+# Enable natural scrolling
+exec --no-startup-id xinput set-prop 9 319 1
